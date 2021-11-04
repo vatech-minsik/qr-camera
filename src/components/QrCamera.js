@@ -86,8 +86,14 @@ const QrCamera = forwardRef((props, ref) => {
         try {
           const { videoWidth, videoHeight } = video;
           const videoRatio = videoWidth / videoHeight;
-          const width = root.clientHeight * videoRatio;
-          const height = root.clientHeight;
+          const width =
+            root.clientWidth > root.clientHeight * videoRatio
+              ? root.clientWidth
+              : root.clientHeight * videoRatio;
+          const height =
+            root.clientWidth > root.clientHeight * videoRatio
+              ? root.clientWidth / videoRatio
+              : root.clientHeight;
 
           const videoQrArea = videoWidth / 1.5;
           const canvasQrArea = width / 1.5;
