@@ -59,10 +59,10 @@ const QrCamera = forwardRef((props, ref) => {
       onError(err);
     }
 
-    return () =>
-      userMedia.then((stream) => {
-        stream.getTracks().forEach((track) => track.stop());
-      });
+    // return () =>
+    //   userMedia.then((stream) => {
+    //     stream.getTracks().forEach((track) => track.stop());
+    //   });
   }, [mode, stop, onError]);
 
   useEffect(() => {

@@ -21,7 +21,7 @@ const App = () => {
           reverse={facingMode === "user"} // 카메라의 좌우반전 [default: false]
           mode={facingMode} // "user", "environment" [default: "user"]
           stop={stopCam} // video 정지여부 [default: false]
-          delay={500} // ms단위 [default: 500]
+          delay={1000} // ms단위 [default: 500]
           onScan={(code) => {
             // 메인 함수
             if (code?.data) {
