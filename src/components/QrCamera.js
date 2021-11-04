@@ -51,18 +51,20 @@ const QrCamera = forwardRef((props, ref) => {
     });
     try {
       userMedia.then((stream) => {
-        if (stop) stream.getTracks().forEach((track) => track.stop());
-        else videoRef.current.srcObject = stream;
+        if (stop) {
+          stream.getTracks().forEach((track) => track.stop());
+          videoRef.current.srcObject = null;
+        } else videoRef.current.srcObject = stream;
       });
     } catch (err) {
       console.error(err);
       onError(err);
     }
 
-    return () =>
-      userMedia.then((stream) => {
-        stream.getTracks().forEach((track) => track.stop());
-      });
+    // return () =>
+    //   userMedia.then((stream) => {
+    //     stream.getTracks().forEach((track) => track.stop());
+    //   });
   }, [mode, stop, onError]);
 
   useEffect(() => {
