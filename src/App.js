@@ -13,17 +13,16 @@ const App = () => {
       <div style={{ width: "100vw", height: "100vh" }}>
         <QrCamera
           ref={camRef}
-          reverse={true} // 카메라의 좌우반전 [default: false]
+          reverse={false} // 카메라의 좌우반전 [default: false]
           mode={facingMode} // "user", "environment" [default: "user"]
           stop={stopCam} // video 정지여부 [default: false]
           delay={500} // ms단위 [default: 500]
           onScan={(code) => {
             // 메인 함수
-            console.log(code);
-            // if (code?.data) {
-            //   setStopCam(true);
-            //   window.open(code.data, "_blank");
-            // }
+            if (code?.data) {
+              // setStopCam(true);
+              window.open(code.data, "_blank");
+            }
           }}
           onError={(error) => {
             console.log(error);
@@ -46,3 +45,4 @@ const App = () => {
 };
 
 export default App;
+//
