@@ -40,6 +40,9 @@ const QrCamera = forwardRef((props, ref) => {
   const videoRef = useRef();
   const canvasRef = useRef();
 
+            
+ 
+
   useEffect(() => {
     const { mediaDevices } = navigator;
     const userMedia = mediaDevices.getUserMedia({
@@ -82,9 +85,13 @@ const QrCamera = forwardRef((props, ref) => {
     const tick = () => {
       if (canvas) {
         try {
+          const actualHeight = window.innerHeight;
+          const elementHeight = document.getElementById("root").clientHeight;
+          const barHeight = elementHeight - actualHeight;
+
           const videoRatio = video.videoWidth / video.videoHeight;
-          const width = root.getBoundingClientRect().height * videoRatio;
-          const height = root.getBoundingClientRect().height;
+          const width = (root.getBoundingClientRect().height - barHeight) * videoRatio;
+          const height = (root.getBoundingClientRect().height - barHeight);
 
           const correctedX = width / 2 - width / 4;
           const correctedY = height / 2 - width / 4;
