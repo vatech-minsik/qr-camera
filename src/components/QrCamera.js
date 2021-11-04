@@ -84,12 +84,16 @@ const QrCamera = forwardRef((props, ref) => {
     const tick = () => {
       if (canvas) {
         try {
-          const videoRatio = video.videoWidth / video.videoHeight;
+          const { videoWidth, videoHeight } = video;
+          const videoRatio = videoWidth / videoHeight;
           const width = root.clientHeight * videoRatio;
           const height = root.clientHeight;
 
-          const correctedX = width / 2 - width / 4;
-          const correctedY = height / 2 - width / 4;
+          const videoQrArea = videoWidth / 1.5;
+          const canvasQrArea = width / 1.5;
+
+          const correctedX = (width - canvasQrArea) / 2;
+          const correctedY = (height - canvasQrArea) / 2;
 
           const drawLine = (begin, end, color) => {
             ctx.beginPath();
@@ -115,22 +119,22 @@ const QrCamera = forwardRef((props, ref) => {
             ctx.filter = "blur(0px)";
             ctx.drawImage(
               video,
-              video.videoWidth / 2 - video.videoWidth / 4,
-              video.videoHeight / 2 - video.videoWidth / 4,
-              video.videoWidth / 2,
-              video.videoWidth / 2,
+              (videoWidth - videoQrArea) / 2,
+              (videoHeight - videoQrArea) / 2,
+              videoQrArea,
+              videoQrArea,
               correctedX,
               correctedY,
-              width / 2,
-              width / 2
+              canvasQrArea,
+              canvasQrArea
             );
-            ctx.strokeRect(correctedX, correctedY, width / 2, width / 2);
+            ctx.strokeRect(correctedX, correctedY, canvasQrArea, canvasQrArea);
 
             const imageData = ctx.getImageData(
               correctedX,
               correctedY,
-              width / 2,
-              width / 2
+              canvasQrArea,
+              canvasQrArea
             );
             const code = jsQR(
               imageData.data,
