@@ -76,7 +76,8 @@ const QrCamera = forwardRef((props, ref) => {
     let frameReq = null;
     let qrData = null;
 
-    console.log(root.clientWidth + " / " + root.clientHeight);
+    console.log("root", root.clientWidth + " / " + root.clientHeight);
+    console.log("video", video.width + " / " + video.height);
 
     const timeout = setInterval(() => {
       !stop && onScan(qrData);
