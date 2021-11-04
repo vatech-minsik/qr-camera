@@ -85,13 +85,10 @@ const QrCamera = forwardRef((props, ref) => {
     const tick = () => {
       if (canvas) {
         try {
-          const actualHeight = window.innerHeight;
-          const elementHeight = document.getElementById("root").clientHeight;
-          const barHeight = elementHeight - actualHeight;
 
           const videoRatio = video.videoWidth / video.videoHeight;
-          const width = (root.getBoundingClientRect().height - barHeight) * videoRatio;
-          const height = (root.getBoundingClientRect().height - barHeight);
+          const width = root.clientHeight * videoRatio;
+          const height = root.clientHeight;
 
           const correctedX = width / 2 - width / 4;
           const correctedY = height / 2 - width / 4;

@@ -10,7 +10,13 @@ const App = () => {
 
   return (
     <>
-      <div style={{ width: "100vw", height: "100vh" }}>
+      <div
+        style={{
+          width: "100vw",
+          height: "100vh",
+          minHeight: "-webkit-fill-available",
+        }}
+      >
         <QrCamera
           ref={camRef}
           reverse={false} // 카메라의 좌우반전 [default: false]
