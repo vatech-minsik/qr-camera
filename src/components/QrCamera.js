@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    overflow: "hidden",
   },
   video: {
     width: "100%",
@@ -82,10 +83,11 @@ const QrCamera = forwardRef((props, ref) => {
       if (canvas) {
         try {
           const videoRatio = video.videoWidth / video.videoHeight;
-          const width = root.offsetWidth;
-          const height = root.offsetWidth / videoRatio;
-          const correctedX = width / 2 - width / 6;
-          const correctedY = height / 2 - width / 6;
+          const width = root.clientHeight * videoRatio;
+          const height = root.clientHeight;
+
+          const correctedX = width / 2 - width / 4;
+          const correctedY = height / 2 - width / 4;
 
           const drawLine = (begin, end, color) => {
             ctx.beginPath();
@@ -109,8 +111,8 @@ const QrCamera = forwardRef((props, ref) => {
             ctx.filter = "blur(0px)";
             ctx.drawImage(
               video,
-              video.videoWidth / 2 - video.videoWidth / 6,
-              video.videoHeight / 2 - video.videoWidth / 6,
+              video.videoWidth / 2 - video.videoWidth / 4,
+              video.videoHeight / 2 - video.videoWidth / 4,
               video.videoWidth / 2,
               video.videoWidth / 2,
               correctedX,
