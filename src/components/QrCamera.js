@@ -83,8 +83,8 @@ const QrCamera = forwardRef((props, ref) => {
       if (canvas) {
         try {
           const videoRatio = video.videoWidth / video.videoHeight;
-          const width = root.scrollHeight * videoRatio;
-          const height = root.scrollHeight;
+          const width = root.getBoundingClientRect().height * videoRatio;
+          const height = root.getBoundingClientRect().height;
 
           const correctedX = width / 2 - width / 4;
           const correctedY = height / 2 - width / 4;
