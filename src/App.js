@@ -14,12 +14,11 @@ const App = () => {
         style={{
           width: "100vw",
           height: "100vh",
-          minHeight: "-webkit-fill-available",
         }}
       >
         <QrCamera
           ref={camRef}
-          reverse={false} // 카메라의 좌우반전 [default: false]
+          reverse={facingMode === "user"} // 카메라의 좌우반전 [default: false]
           mode={facingMode} // "user", "environment" [default: "user"]
           stop={stopCam} // video 정지여부 [default: false]
           delay={500} // ms단위 [default: 500]
