@@ -40,9 +40,6 @@ const QrCamera = forwardRef((props, ref) => {
   const videoRef = useRef();
   const canvasRef = useRef();
 
-            
- 
-
   useEffect(() => {
     const { mediaDevices } = navigator;
     const userMedia = mediaDevices.getUserMedia({
@@ -85,7 +82,6 @@ const QrCamera = forwardRef((props, ref) => {
     const tick = () => {
       if (canvas) {
         try {
-
           const videoRatio = video.videoWidth / video.videoHeight;
           const width = root.clientHeight * videoRatio;
           const height = root.clientHeight;
@@ -109,6 +105,8 @@ const QrCamera = forwardRef((props, ref) => {
 
             ctx.filter = "blur(10px)";
             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            ctx.clearRect(correctedX, correctedY, width / 2, width / 2);
+
             ctx.setLineDash([5]);
             ctx.strokeStyle = "#00897b";
             ctx.lineWidth = 6;
