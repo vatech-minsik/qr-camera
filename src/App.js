@@ -4,6 +4,8 @@ import QrCamera from "./components/QrCamera";
 const App = () => {
   const [facingMode, setFacingMode] = useState("environment");
   const [stopCam, setStopCam] = useState(false);
+
+  const [stopScan, setStopScan] = useState(false);
   const camRef = useRef();
 
   console.log(camRef.current?.children[1].offsetHeight);
@@ -24,10 +26,10 @@ const App = () => {
           delay={1000} // ms단위 [default: 500]
           onScan={(code) => {
             // 메인 함수
-            if (code?.data) {
-              // setStopCam(true);
+            if (Boolean(code?.data) && !stopScan) {
+              setStopScan(true);
               window.open(code.data, "_blank");
-            }
+            } else setStopScan(false);
           }}
           onError={(error) => {
             console.log(error);

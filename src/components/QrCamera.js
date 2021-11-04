@@ -59,10 +59,10 @@ const QrCamera = forwardRef((props, ref) => {
       onError(err);
     }
 
-    // return () =>
-    //   userMedia.then((stream) => {
-    //     stream.getTracks().forEach((track) => track.stop());
-    //   });
+    return () =>
+      userMedia.then((stream) => {
+        stream.getTracks().forEach((track) => track.stop());
+      });
   }, [mode, stop, onError]);
 
   useEffect(() => {
@@ -74,8 +74,8 @@ const QrCamera = forwardRef((props, ref) => {
     let frameReq = null;
     let qrData = null;
 
-    const timeout = setInterval(async () => {
-      !stop && (await onScan(qrData));
+    const timeout = setInterval(() => {
+      !stop && onScan(qrData);
       qrData = null;
     }, delay);
 
