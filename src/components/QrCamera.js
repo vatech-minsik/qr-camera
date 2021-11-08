@@ -98,8 +98,8 @@ const QrCamera = forwardRef((props, ref) => {
               ? root.clientWidth / videoRatio
               : root.clientHeight;
 
-          const videoQrArea = videoWidth / 1.5;
-          const canvasQrArea = root.clientWidth / 1.5;
+          const videoQrArea = videoWidth / 2;
+          const canvasQrArea = width / 2;
 
           const correctedX = (width - canvasQrArea) / 2;
           const correctedY = (height - canvasQrArea) / 2;
@@ -118,14 +118,15 @@ const QrCamera = forwardRef((props, ref) => {
             canvas.width = width;
             canvas.height = height;
 
-            ctx.filter = "blur(10px)";
             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-            ctx.clearRect(correctedX, correctedY, width / 2, width / 2);
+            ctx.clearRect(correctedX, correctedY, canvasQrArea, canvasQrArea);
+            ctx.fillStyle = "rgba(0, 0, 0, 0.68)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             ctx.setLineDash([5]);
             ctx.strokeStyle = "#00897b";
             ctx.lineWidth = 6;
-            ctx.filter = "blur(0px)";
+
             ctx.drawImage(
               video,
               (videoWidth - videoQrArea) / 2,
