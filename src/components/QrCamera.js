@@ -44,7 +44,7 @@ const QrCamera = forwardRef((props, ref) => {
     const { mediaDevices } = navigator;
     const userMedia = mediaDevices.getUserMedia({
       video: {
-        height: { ideal: rootRef.current.clientHeight },
+        height: { ideal: window.innerHeight },
         facingMode: mode,
       },
       audio: false,
@@ -90,10 +90,13 @@ const QrCamera = forwardRef((props, ref) => {
           const { videoWidth, videoHeight } = video;
           const videoRatio = videoWidth / videoHeight;
           const width =
-            root.clientWidth > root.clientHeight * videoRatio
-              ? root.clientWidth
+            window.innerHeight < root.clientHeight
+              ? window.innerHeight * videoRatio
               : root.clientHeight * videoRatio;
-          const height = root.clientHeight;
+          const height =
+            window.innerHeight < root.clientHeight
+              ? window.innerHeight
+              : root.clientHeight;
 
           const videoQrArea = videoWidth / 2;
           const canvasQrArea = width / 2;
