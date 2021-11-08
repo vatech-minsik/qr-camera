@@ -90,11 +90,11 @@ const QrCamera = forwardRef((props, ref) => {
           const { videoWidth, videoHeight } = video;
           const videoRatio = videoWidth / videoHeight;
           const width =
-            window.innerHeight < root.clientHeight
+            window.innerHeight <= root.clientHeight
               ? window.innerHeight * videoRatio
               : root.clientHeight * videoRatio;
           const height =
-            window.innerHeight < root.clientHeight
+            window.innerHeight <= root.clientHeight
               ? window.innerHeight
               : root.clientHeight;
 
