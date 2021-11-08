@@ -44,7 +44,7 @@ const QrCamera = forwardRef((props, ref) => {
     const { mediaDevices } = navigator;
     const userMedia = mediaDevices.getUserMedia({
       video: {
-        height: { ideal: window.innerHeight },
+        height: { ideal: rootRef.current.clientHeight },
         facingMode: mode,
       },
       audio: false,
@@ -93,10 +93,7 @@ const QrCamera = forwardRef((props, ref) => {
             root.clientWidth > root.clientHeight * videoRatio
               ? root.clientWidth
               : root.clientHeight * videoRatio;
-          const height =
-            root.clientWidth > root.clientHeight * videoRatio
-              ? root.clientWidth / videoRatio
-              : root.clientHeight;
+          const height = root.clientHeight;
 
           const videoQrArea = videoWidth / 2;
           const canvasQrArea = width / 2;
@@ -108,10 +105,11 @@ const QrCamera = forwardRef((props, ref) => {
             ctx.beginPath();
             ctx.moveTo(begin.x + correctedX, begin.y + correctedY);
             ctx.lineTo(end.x + correctedX, end.y + correctedY);
-            ctx.setLineDash([5]);
-            ctx.lineWidth = 4;
+            ctx.setLineDash([0]);
+            ctx.lineWidth = 3;
             ctx.strokeStyle = color;
             ctx.stroke();
+            ctx.closePath();
           };
 
           if (video.readyState === video.HAVE_ENOUGH_DATA) {
@@ -123,7 +121,7 @@ const QrCamera = forwardRef((props, ref) => {
             ctx.fillStyle = "rgba(0, 0, 0, 0.68)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            ctx.setLineDash([5]);
+            ctx.setLineDash([4]);
             ctx.strokeStyle = "#00897b";
             ctx.lineWidth = 6;
 
